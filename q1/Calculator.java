@@ -23,6 +23,12 @@ public class Calculator
     public void setvb( int valueB ) {
         this.valueB = valueB;
     }
+    public void setop( char op ) {
+        this.op = op;
+    }
+    public char getop() {
+        return this.op;
+    }
 
     private boolean testValue( int valueX ) {
         if( (valueX <= 100) && (valueX >= -100) ) {
@@ -33,39 +39,51 @@ public class Calculator
     }
     public boolean testOperator() {
         switch (this.op) {
-            case '+' -> return true;
-            case '-' -> return true;
-            case '/' -> return true;
-            case '*' -> return true;
-            default -> return false;
+            case '+':
+                return true;
+            case '-':
+                return true;
+            case '/':
+                return true;
+            case '*':
+                return true;
+            default:
+                return false;
         }
     }
     public int calculate() {
         switch (this.op) {
-            case '+' -> this.result = (this.valueA+this.valueB);
-            case '-' -> this.result = (this.valueA-this.valueB);
-            case '/' -> this.result = (this.valueA/this.valueB);
-            case '*' -> this.result = (this.valueA*this.valueB);
-            default  -> return -1;
+            case '+':
+                this.result = (this.valueA+this.valueB);
+                break;
+            case '-':
+                this.result = (this.valueA-this.valueB);
+                break;
+            case '/':
+                this.result = (this.valueA/this.valueB);
+                break;
+            case '*':
+                this.result = (this.valueA*this.valueB);
+                break;
+            default:
+                return -1;
         }
         return this.result;
     }
     public void show() {
-        System.print.out("\033c");
-        System.print.out("\n" + String.valueOf(getva()) + " ");
-        System.print.out( op + " " + String.valueOf(getvb()) );
-        System.print.out( " = " < String.valueOf(getr()) );
+        System.out.print("\033c");
+        System.out.print("\n" + String.valueOf(getva()) + " ");
+        System.out.print( op + " " + String.valueOf(getvb()) );
+        System.out.println( " = " + String.valueOf(getr()) );
     }
     public void captureInformations() {
         Scanner scan = new Scanner(System.in);
 
         String capture = scan.nextLine();
-        int sz = capture.length();
-        String va, vb;
-        char op;
+        String[] index = capture.split(" ");
 
-        for( int i = 0 ; (capture[i]!="+" && capture[i]!="-" && capture[i]!="*" && capture[i]!="/") ; ++i ) {
-
-        }
+        setva( Integer.parseInt(index[0]) );
+        setop( index[1].charAt(0) );
+        setvb( Integer.parseInt(index[2]) );
     }
 }

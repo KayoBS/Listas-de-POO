@@ -1,5 +1,13 @@
+import java.util.Scanner;
+
 public class Main
 {
-    Calculator clc = new Calculator();
+	public static void main( String[] args )
+	{
+		Calculator calc = new Calculator();
 
+		calc.captureInformations();
+		calc.calculate();
+		calc.show();
+	}
 }
