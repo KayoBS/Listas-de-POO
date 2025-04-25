@@ -7,7 +7,5 @@ public class Main
 		Calculator calc = new Calculator();
 
 		calc.captureInformations();
-		calc.calculate();
-		calc.show();
 	}
 }

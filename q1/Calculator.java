@@ -5,29 +5,29 @@ public class Calculator
     private int valueA;
     private int valueB;
     private int result;
-    private char op;
+    private char operand;
 
     //get value a
-    public int getva() {
+    public int getValueA() {
         return this.valueA;
     }
-    public int getvb() {
+    public int getValueB() {
         return this.valueB;
     }
-    public int getr() {
+    public int getResult() {
         return this.result;
     }
-    public void setva( int valueA ) {
+    public void setValueA( int valueA ) {
         this.valueA = valueA;
     }
-    public void setvb( int valueB ) {
+    public void setValueB( int valueB ) {
         this.valueB = valueB;
     }
-    public void setop( char op ) {
-        this.op = op;
+    public void setOperand( char operand ) {
+        this.operand = operand;
     }
-    public char getop() {
-        return this.op;
+    public char getOperand() {
+        return this.operand;
     }
 
     private boolean testValue( int valueX ) {
@@ -38,7 +38,7 @@ public class Calculator
         }
     }
     public boolean testOperator() {
-        switch (this.op) {
+        switch (this.operand) {
             case '+':
                 return true;
             case '-':
@@ -52,7 +52,7 @@ public class Calculator
         }
     }
     public int calculate() {
-        switch (this.op) {
+        switch (this.operand) {
             case '+':
                 this.result = (this.valueA+this.valueB);
                 break;
@@ -72,18 +72,32 @@ public class Calculator
     }
     public void show() {
         System.out.print("\033c");
-        System.out.print("\n" + String.valueOf(getva()) + " ");
-        System.out.print( op + " " + String.valueOf(getvb()) );
-        System.out.println( " = " + String.valueOf(getr()) );
+        System.out.print("\n" + String.valueOf(getValueA()) + " ");
+        System.out.print( operand + " " + String.valueOf(getValueB()) );
+        System.out.println( " = " + String.valueOf(getResult()) );
     }
     public void captureInformations() {
         Scanner scan = new Scanner(System.in);
+        boolean isCorrect = false;
 
-        String capture = scan.nextLine();
-        String[] index = capture.split(" ");
+        while (!isCorrect)
+        {
+            String capture = scan.nextLine();
+            String[] index = capture.split(" ");
 
-        setva( Integer.parseInt(index[0]) );
-        setop( index[1].charAt(0) );
-        setvb( Integer.parseInt(index[2]) );
+            setValueA( Integer.parseInt(index[0]) );
+            setOperand( index[1].charAt(0) );
+            setValueB( Integer.parseInt(index[2]) );
+
+            isCorrect = this.testOperator();
+            if(isCorrect)
+            {
+                if( this.testValue(getValueA()) && this.testValue(getValueB()))
+                {
+                    this.calculate();
+                    this.show();
+                }
+            }
+        }
     }
 }
